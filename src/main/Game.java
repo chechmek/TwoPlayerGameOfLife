@@ -19,11 +19,19 @@ public class Game {
     }
 
     public void Start(){
-        //board.setUp()
+        //ask player names
+        // which symbol will be used
+        // board.setSymbols
+        // sort players on alphabetical order
+        //board.setUp() probably will make random
         while (true){
-
-
             board.render();
+
+            //for both players
+            // player.play // choose one to add, one to destroy
+            // board.nextGeneration()
+            // board.checkIfWon
+
         }
     }
 }

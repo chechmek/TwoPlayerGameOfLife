@@ -10,8 +10,10 @@ import java.util.List;
 public class Board implements Displayable {
     private Cell[][] map;
     private List<UI> userInterfaces = new ArrayList<>();
+    private int generationCount;
     public Board(int width, int height){
         initMap(width, height);
+        generationCount = 0;
     }
 
     private void initMap(int width, int height){
@@ -34,6 +36,6 @@ public class Board implements Displayable {
     @Override
     public void render() {
         for(UI ui : userInterfaces)
-            ui.update(map);
+            ui.update(map, generationCount);
     }
 }
