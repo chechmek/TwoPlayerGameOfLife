@@ -1,8 +1,8 @@
 package main.CellLogic;
 
+import java.util.List;
+
 public interface CellState {
-    void setPlayerOne();
-    void setPlayerTwo();
-    void setEmpty();
+    CellState getNewState(List<Cell> neighbours);
     CellMark getMark();
 }

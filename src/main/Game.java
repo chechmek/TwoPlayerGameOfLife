@@ -21,7 +21,7 @@ public class Game {
     public void Start(){
         //ask player names
         // which symbol will be used
-        // board.setSymbols
+        // ui.setSymbols
         // sort players on alphabetical order
         //board.setUp() probably will make random
         while (true){
@@ -29,7 +29,7 @@ public class Game {
 
             //for both players
             // player.play // choose one to add, one to destroy
-            // board.nextGeneration()
+            board.nextGeneration();
             // board.checkIfWon
 
         }
