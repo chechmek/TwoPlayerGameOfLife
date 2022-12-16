@@ -7,12 +7,13 @@ import main.Static.Input;
 import main.UILogic.ConsoleUI;
 import main.UILogic.UI;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 public class Game {
-    private List<Player> players;
+    private List<Player> players = new ArrayList<>();
     private Board board;
     private Player curPlayer;
 
@@ -25,6 +26,8 @@ public class Game {
     }
 
     public void Start(){
+        players.add(new Player());
+        players.add(new Player());
         for(Player p : players){
             p.name = Input.GetPlayerName();
             p.symbol = Input.GetPlayerSymbol();
@@ -46,6 +49,7 @@ public class Game {
 
         //board.setUp() probably will make random//TODO
         while (true){
+            nextPlayer();
             board.render();//TODO
 
             // player.play // choose one to add, one to destroy
@@ -53,7 +57,7 @@ public class Game {
 
             board.nextGeneration();//TODO
             // board.checkIfWon//TODO
-            nextPlayer();
+
         }
     }
 

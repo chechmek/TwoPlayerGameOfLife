@@ -21,7 +21,7 @@ public class Board implements Displayable {
 
     public void nextGeneration(){
         for(int i = 0; i < map.length; i++)
-            for(int j = 0; j < map[i].length; i++){
+            for(int j = 0; j < map[i].length; j++){
                 List<Cell> neighbours = getNeighbours(i, j);
                 map[i][j].Handle(neighbours);
             }
@@ -47,7 +47,7 @@ public class Board implements Displayable {
     private void initMap(int width, int height){
         map = new Cell[height][width];
         for(int i = 0; i < map.length; i++)
-            for(int j = 0; j < map[i].length; i++)
+            for(int j = 0; j < map[i].length; j++)
                 map[i][j] = new Cell();
     }
 
