@@ -1,5 +1,6 @@
 package main;
 
+import main.CellLogic.CellMark;
 import main.Models.Board;
 import main.Models.GameSettings;
 import main.Models.Player;
@@ -15,6 +16,7 @@ import java.util.List;
 public class Game {
     private List<Player> players = new ArrayList<>();
     private Board board;
+    private CellMark playerMark;
     private Player curPlayer;
 
     private UI ui;
@@ -43,7 +45,7 @@ public class Game {
 
         try{
             ConsoleUI cui = (ConsoleUI)ui;
-            cui.setSymbols(players.get(0).symbol, players.get(1).symbol);
+            cui.setSymbols(players.get(1).symbol, players.get(2).symbol);
         }
         catch(Exception ex){}
 
@@ -53,7 +55,7 @@ public class Game {
             board.render();//TODO
 
             // player.play // choose one to add, one to destroy
-            curPlayer.play();//TODO
+            curPlayer.play(board,playerMark);//TODO
 
             board.nextGeneration();//TODO
             // board.checkIfWon//TODO
