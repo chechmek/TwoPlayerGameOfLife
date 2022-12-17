@@ -10,7 +10,9 @@ import java.util.Scanner;
 public class Player {
     public String name;
     public String symbol;
-    public void play(Board board, CellMark playerMark){ // TODO What is first, delete or add?
+    // TODO What is first, delete or add?
+    // also need to check if playermark is correct
+    public void play(Board board, CellMark playerMark){
         System.out.println("Create cell:");
         int[] coord = Input.GetPlayerCoord();
         board.aliveCell(coord[0],coord[1],playerMark);

@@ -55,10 +55,10 @@ public class Game {
             board.render();//TODO
 
             // player.play // choose one to add, one to destroy
-            curPlayer.play(board,playerMark);//TODO
+            curPlayer.play(board,playerMark);//TODO need to check if playermark is correct
 
             board.nextGeneration();//TODO
-            // board.checkIfWon//TODO
+            board.checkIfWon(board,curPlayer);
 
         }
     }
