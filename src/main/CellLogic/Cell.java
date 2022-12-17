@@ -8,7 +8,7 @@ public class Cell {
         state = new DeadCellState();
     }
 
-    public void Handle(List<Cell> neighbours){
-        state = state.getNewState(neighbours);
+    public Cell(CellState state){
+        this.state = state;
     }
 }

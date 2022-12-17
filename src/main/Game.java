@@ -1,6 +1,6 @@
 package main;
 
-import main.Models.Board;
+import main.BoardLogic.Board;
 import main.Models.GameSettings;
 import main.Models.Player;
 import main.Static.Input;
@@ -55,7 +55,7 @@ public class Game {
             // player.play // choose one to add, one to destroy
             curPlayer.play();//TODO
 
-            board.nextGeneration();//TODO
+            board.nextGeneration();
             // board.checkIfWon//TODO
 
         }
