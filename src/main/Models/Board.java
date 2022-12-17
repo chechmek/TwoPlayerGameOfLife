@@ -39,7 +39,24 @@ public class Board implements Displayable {
 
         map[i][j].state = new AliveCellState(playerMark);
     }
-
+    public int[] calculateCells(Cell[][] map){
+        int counterPlayerOne = 0;
+        int counterPlayerTwo = 0;
+        int returnCounter[] = null;
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+                if (map[i][j].state.getMark() == CellMark.PlayerOne) {
+                    counterPlayerOne++;
+                }
+                else if (map[i][j].state.getMark() == CellMark.PlayerTwo) {
+                    counterPlayerTwo++;
+                }
+            }
+        }
+        returnCounter[0]=counterPlayerOne;
+        returnCounter[1]=counterPlayerTwo;
+        return returnCounter;
+    }
     private List<Cell> getNeighbours(int i, int j){
         return null; // TODO
     }
@@ -64,6 +81,6 @@ public class Board implements Displayable {
     @Override
     public void render() {
         for(UI ui : userInterfaces)
-            ui.update(map, generationCount);
+            ui.updateUI(map, generationCount);
     }
 }
