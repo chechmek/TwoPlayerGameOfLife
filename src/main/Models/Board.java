@@ -57,6 +57,18 @@ public class Board implements Displayable {
         returnCounter[1]=counterPlayerTwo;
         return returnCounter;
     }
+    public boolean checkIfWon(Board board, Player player) {
+
+        boolean checkPlayer = false;
+        for (int i = 0; i < board.map.length; i++) {
+            for (int j = 0; j < board.map[i].length; j++) {
+                if (board.map[i][j].state.getMark() == CellMark.PlayerOne) {
+                    checkPlayer = true;
+                }
+            }
+        }
+        return checkPlayer;
+    }
     private List<Cell> getNeighbours(int i, int j){
         return null; // TODO
     }
