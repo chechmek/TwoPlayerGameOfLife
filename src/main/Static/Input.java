@@ -1,5 +1,6 @@
 package main.Static;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Input {
@@ -20,6 +21,30 @@ public class Input {
             }
         }
         return name;
+    }
+    public static int[] GetPlayerCoord(){
+        boolean gotPlayerChoice = false;
+        int[] coordinates= new int[10];
+        while (!gotPlayerChoice) {
+            try {
+                String Input = input.nextLine();
+                String[] numbers = Input.split(" ");
+                if (numbers.length==2){
+                    for (int i=0;i<numbers.length;i++){
+                        coordinates = new int[]{Integer.parseInt(Arrays.toString(numbers))};
+                    }
+                    gotPlayerChoice=true;
+                }
+                else {
+                    System.out.println("Enter only two numbers");
+                }
+                return coordinates;
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+                System.out.println("Try again");
+            }
+        }
+        return coordinates;
     }
 
     public static String GetPlayerSymbol(){
