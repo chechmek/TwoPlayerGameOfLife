@@ -1,13 +1,14 @@
 package main.BoardLogic;
 
 import main.CellLogic.Cell;
+import main.CellLogic.CellMark;
 import main.Models.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BoardHelper {
-    private List<Pair> neighboursOffsets;
+    private final List<Pair> neighboursOffsets;
     public BoardHelper(){
         neighboursOffsets = new ArrayList<>();
         neighboursOffsets.add(new Pair(-1, 0));
@@ -33,5 +34,22 @@ public class BoardHelper {
         }
 
         return neighbours;
+    }
+
+    public Pair calculateNumberOfCells(Cell[][] map){
+        int counterPlayerOne = 0;
+        int counterPlayerTwo = 0;
+
+        for (Cell[] cells : map) {
+            for (int j = 0; j < cells.length; j++) {
+                if (cells[j].state.getMark() == CellMark.PlayerOne) {
+                    counterPlayerOne++;
+                } else if (cells[j].state.getMark() == CellMark.PlayerTwo) {
+                    counterPlayerTwo++;
+                }
+            }
+        }
+
+        return new Pair(counterPlayerOne, counterPlayerTwo);
     }
 }
