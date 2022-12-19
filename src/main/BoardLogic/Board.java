@@ -17,9 +17,13 @@ public class Board implements Displayable {
     private final List<UI> userInterfaces = new ArrayList<>();
     private int generationCount;
     private final BoardHelper helper = new BoardHelper();
-    public Board(int width, int height){
-        this.width = width;
-        this.height = height;
+    public Board(int w, int h){
+        if(w % 2 != 0)
+            w++;
+        if(h % 2 != 0)
+            h++;
+        this.width = h;
+        this.height = w;
         initMap(width, height);
         generationCount = 0;
     }
@@ -41,18 +45,18 @@ public class Board implements Displayable {
     //for players
     //killCell(x, y)
     public void killCellOn(int i, int j){
-        map[i][j].state = new DeadCellState();
+        map[j][i].state = new DeadCellState();
     }
 
     public void aliveCell(int i, int j, CellMark playerMark) throws Exception {
         if(playerMark == CellMark.Empty)
             throw new Exception("Got wrong mark");
 
-        map[i][j].state = new AliveCellState(playerMark);
+        map[j][i].state = new AliveCellState(playerMark);
     }
 
     private void initMap(int width, int height){
-        map = new Cell[height][width];
+        map = new Cell[width][height];
         for(int i = 0; i < map.length; i++)
             for(int j = 0; j < map[i].length; j++)
                 map[i][j] = new Cell(new DeadCellState());
@@ -64,12 +68,28 @@ public class Board implements Displayable {
             for(int j = 0; j < newMap[i].length; j++)
                 newMap[i][j] = new Cell(new DeadCellState());
 
-        newMap[14][15] = new Cell(new AliveCellState(CellMark.PlayerOne));
-        newMap[14][16] = new Cell(new AliveCellState(CellMark.PlayerOne));
-        newMap[14][17] = new Cell(new AliveCellState(CellMark.PlayerOne));
-        newMap[15][15] = new Cell(new AliveCellState(CellMark.PlayerOne));
-        newMap[16][16] = new Cell(new AliveCellState(CellMark.PlayerOne));
-        map = newMap;
+        boolean set = false;
+        while (!set){
+            try{
+                newMap[4][5] = new Cell(new AliveCellState(CellMark.PlayerOne));
+                newMap[4][6] = new Cell(new AliveCellState(CellMark.PlayerOne));
+                newMap[4][7] = new Cell(new AliveCellState(CellMark.PlayerTwo));
+                newMap[5][5] = new Cell(new AliveCellState(CellMark.PlayerOne));
+                newMap[6][6] = new Cell(new AliveCellState(CellMark.PlayerOne));
+
+                newMap = helper.mirrorMapHorizontally(newMap);
+
+                map = newMap;
+                set = true;
+            }
+            catch (Exception ex){
+                System.out.println(ex.getMessage());
+                System.out.println("Try again");
+            }
+        }
+
+
+
     }
 
     @Override

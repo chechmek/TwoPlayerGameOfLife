@@ -33,11 +33,11 @@ public class ConsoleUI implements UI{
         for (int i = 0; i < map.length; i++){
             writeIndex(i);
         }
-        for (int i = 0; i < map.length; i++) {
+        for (int i = 0; i < map[0].length; i++) {
             System.out.println();
             writeIndex(i);
-            for (int j = 0; j < map[i].length; j++) {
-                System.out.print(playerSymbols.get(map[i][j].state.getMark()) + "  ");
+            for (int j = 0; j < map.length; j++) {
+                System.out.print(playerSymbols.get(map[j][i].state.getMark()) + "  ");
             }
         }
         System.out.println();

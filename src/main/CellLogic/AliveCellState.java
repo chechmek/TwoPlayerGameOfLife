@@ -3,7 +3,7 @@ package main.CellLogic;
 import java.util.List;
 
 public class AliveCellState extends CellStateBase{
-    public AliveCellState(CellMark playerMark){
+    public AliveCellState(CellMark playerMark) {
         mark = playerMark;
     }
 
@@ -19,5 +19,12 @@ public class AliveCellState extends CellStateBase{
     @Override
     public boolean isAlive() {
         return true;
+    }
+
+    public CellState getOppositePlayerState(){
+        if(mark == CellMark.PlayerOne)
+            return new AliveCellState(CellMark.PlayerTwo);
+        else
+            return new AliveCellState(CellMark.PlayerOne);
     }
 }
