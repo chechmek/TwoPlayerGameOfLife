@@ -9,10 +9,8 @@ import main.UILogic.ConsoleUI;
 import main.UILogic.UI;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class Game {
     private final List<Player> players = new ArrayList<>();
@@ -60,21 +58,32 @@ public class Game {
         board.setUp(); //probably will make random//TODO
         while (true){
             nextPlayer();
+            board.render(curPlayer);
 
+            if(checkIfWin())
+                break;
 
-            // player.play // choose one to add, one to destroy
-            board.render();
             curPlayer.play(board);
-            //TimeUnit.MILLISECONDS.sleep(50);
+            board.render(curPlayer);
 
-            board.render();
             System.out.println("Press ENTER to see new generation!");
             Input.Wait();
-
             board.nextGeneration();
-            // board.checkIfWon//TODO
-
         }
+    }
+
+    private boolean checkIfWin(){
+        CellMark playerMark = board.getMarkOfWinningPlayer();
+        if(playerMark == null)
+            return false;
+
+        for(var p : players)
+            if(p.playerMark == playerMark){
+                showWinningScreen(p);
+                break;
+            }
+
+        return true;
     }
 
     private void nextPlayer(){
@@ -84,5 +93,12 @@ public class Game {
             curPlayer = players.get(1);
         else if(curPlayer == players.get(1))
             curPlayer = players.get(0);
+    }
+
+    private void showWinningScreen(Player winningPlayer){
+        System.out.println("=================================================");
+        System.out.println("=================== " + winningPlayer.name.toUpperCase() + " WON" + " ==================");
+        System.out.println("=================================================");
+
     }
 }

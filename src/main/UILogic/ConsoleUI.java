@@ -4,6 +4,7 @@ import main.BoardLogic.BoardHelper;
 import main.CellLogic.Cell;
 import main.CellLogic.CellMark;
 import main.Models.Pair;
+import main.Models.Player;
 
 import java.util.HashMap;
 
@@ -23,13 +24,13 @@ public class ConsoleUI implements UI{
         playerSymbols.put(CellMark.PlayerTwo, s2);
     }
     @Override
-    public void update(Cell[][] map, int generationCount) { //TODO number of cells
+    public void update(Cell[][] map, int generationCount, Player player) {
 
         System.out.println("Generations made:" + generationCount);
         Pair playersCellsCounts = helper.calculateNumberOfCells(map);
         System.out.println("Num of cells Player 1: " + playersCellsCounts.a + "\nNum of cells Player 2: " + playersCellsCounts.b);
-        System.out.println("\n===== "  + "PlayerName(ToBeChanged)" + " =====");
-        System.out.print("   ");
+        System.out.println("\n===== "  + player.name.toUpperCase() + " " + player.symbol + " =====");
+        System.out.print("a b");
         for (int i = 0; i < map.length; i++){
             writeIndex(i);
         }
