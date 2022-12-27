@@ -15,7 +15,7 @@ import java.util.*;
 public class Board implements Displayable {
     public int width;
     public int height;
-    private Cell[][] map;
+    public Cell[][] map;
     private final List<UI> userInterfaces = new ArrayList<>();
     private int generationCount;
     private final BoardHelper helper = new BoardHelper();
@@ -30,8 +30,9 @@ public class Board implements Displayable {
         generationCount = 0;
     }
 
-    public Cell[][] nextGeneration(){
-        Cell[][] nextGenMap = new Cell[width][height];
+
+    public void  nextGeneration(){
+        Cell[][] nextGenMap = new Cell[height][width];
 
         for(int i = 0; i < map.length; i++)
             for(int j = 0; j < map[i].length; j++){
@@ -41,7 +42,7 @@ public class Board implements Displayable {
             }
         map = nextGenMap;
         generationCount++;
-        return map;
+
     }
 
     //for players
