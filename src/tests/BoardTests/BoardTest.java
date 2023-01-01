@@ -61,7 +61,10 @@ class BoardTest {
     }
 
     @Test
-    void killCellOn() {
+    void getMarkOfWinningPlayer() {
+        Board board = new Board(10,10);
+        board.setUp(Boolean.TRUE);
+        board.getMarkOfWinningPlayer();
     }
 
     @Test
@@ -80,8 +83,8 @@ class BoardTest {
     void setUp() {
         Board board = new Board(8,8);
         Board board1 = new Board(8,8);
-        //board.setUp();
-        //board1.setUp();
+        board.setUp(Boolean.TRUE);
+        board1.setUp(Boolean.TRUE);
         assertTrue(arraysEqual(board.getMap(), board1.getMap()));
     }
     @Test
