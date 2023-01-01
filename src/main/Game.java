@@ -9,15 +9,14 @@ import main.UILogic.ConsoleUI;
 import main.UILogic.UI;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class Game {
     private final List<Player> players = new ArrayList<>();
-    private Board board;
+    private final Board board;
     private Player curPlayer;
 
-    private UI ui;
+    private final UI ui;
 
     public Game(GameSettings settings){
         board = new Board(settings.getWidth(), settings.getHeight());
@@ -28,10 +27,6 @@ public class Game {
     public void Start() {
         players.add(new Player(CellMark.PlayerOne));
         players.add(new Player(CellMark.PlayerTwo));
-        for(Player p : players){
-            //p.name = Input.GetPlayerName();
-            //p.symbol = Input.GetPlayerSymbol();
-        }
         // to delete
         players.get(0).setName("PlayerA");
         players.get(0).setSymbol("A");
@@ -39,12 +34,10 @@ public class Game {
         players.get(1).setSymbol("B");
         //
         // sort players
-        players.sort(new Comparator<>() {
-            public int compare(Player o1, Player o2) {
-                if (o1.getName().equals(o2.getName()))
-                    return 0;
-                return o1.getName().compareTo(o2.getName());
-            }
+        players.sort((o1, o2) -> {
+            if (o1.getName().equals(o2.getName()))
+                return 0;
+            return o1.getName().compareTo(o2.getName());
         });
 
         try{
@@ -55,7 +48,7 @@ public class Game {
             System.out.println("Ui is not a console");
         }
 
-        board.setUp(); //probably will make random//TODO
+        board.setUp(Boolean.FALSE);
         while (true){
             nextPlayer();
             board.render(curPlayer);
@@ -63,7 +56,7 @@ public class Game {
             if(checkIfWin())
                 break;
 
-            curPlayer.play(board);
+            curPlayer.play(Input.getString(""),Input.getString(""),board);
             board.render(curPlayer);
 
             System.out.println("Press ENTER to see new generation!");

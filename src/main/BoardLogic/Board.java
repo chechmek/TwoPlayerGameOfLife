@@ -66,21 +66,20 @@ public class Board implements Displayable {
         getMap()[j][i].setState(new AliveCellState(playerMark));
     }
 
-    private void initMap(int width, int height){
+    public void initMap(int width, int height){
         setMap(new Cell[width][height]);
         for(int i = 0; i < getMap().length; i++)
             for(int j = 0; j < getMap()[i].length; j++)
                 getMap()[i][j] = new Cell(new DeadCellState());
     }
 
-    public void setUp(){
+    public void setUp(Boolean checker){
         //Cell[][] newMap = new Cell[height][width];
         for(int i = 0; i < getMap().length; i++)
             for(int j = 0; j < getMap()[i].length; j++)
                 getMap()[i][j] = new Cell(new DeadCellState());
 
         Scanner input = new Scanner(System.in);
-
         Player inputPlayer = new Player(CellMark.PlayerOne);
         inputPlayer.setName("INPUT");
         inputPlayer.setSymbol("");
@@ -94,6 +93,9 @@ public class Board implements Displayable {
         while (!set){
             try{
                 while (!set){
+                    if(checker){
+                        break;
+                    }
                     System.out.println("Type coordinates(e. g. 11, 14) or \"stop\" to finish the map");
                     String inputStr = input.nextLine();
                     if(inputStr.equals("stop"))
@@ -115,7 +117,6 @@ public class Board implements Displayable {
             }
         }
     }
-
     public CellMark getMarkOfWinningPlayer(){
         Set<CellMark> playersLeft = new HashSet<>();
 
