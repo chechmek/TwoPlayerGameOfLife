@@ -7,35 +7,7 @@ import java.util.Scanner;
 
 public class Input {
     private static final Scanner input = new Scanner(System.in);
-    public static String GetPlayerName(){
-        System.out.println("Enter player name:");
-        while (true) {
-            try {
-                String name = input.nextLine().trim();
-                return name;
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-                System.out.println("Try again");
-            }
-        }
-    }
 
-
-    public static String GetPlayerSymbol(){
-        System.out.println("Enter player symbol:");
-
-        while (true) {
-            try {
-                String symbol = input.nextLine();
-                if(symbol.length() != 1)
-                    throw new Exception("Symbol is not valid");
-                return symbol;
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-                System.out.println("Try again");
-            }
-        }
-    }
 
     public static Coordinate getCoordinate(Board board){
         Coordinate coord = new Coordinate();
@@ -50,9 +22,9 @@ public class Input {
                     numbersStr = coordinateStr.split(", ");
 
                 if (numbersStr.length==2){
-                    coord.x = Integer.parseInt(numbersStr[0]) - 1;
-                    coord.y = Integer.parseInt(numbersStr[1]) - 1;
-                    if(coord.x >= board.width || coord.y >= board.height)
+                    coord.setX(Integer.parseInt(numbersStr[0]) - 1);
+                    coord.setY(Integer.parseInt(numbersStr[1]) - 1);
+                    if(coord.getX() >= board.getWidth() || coord.getY() >= board.getHeight())
                         throw new Exception("Not valid coordinates!");
                     return coord;
                 }
@@ -76,9 +48,9 @@ public class Input {
             numbersStr = coordinateStr.split(", ");
 
         if (numbersStr.length==2) {
-            coord.x = Integer.parseInt(numbersStr[0]) - 1;
-            coord.y = Integer.parseInt(numbersStr[1]) - 1;
-            if (coord.x >= board.width || coord.y >= board.height)
+            coord.setX(Integer.parseInt(numbersStr[0]) - 1);
+            coord.setY(Integer.parseInt(numbersStr[1]) - 1);
+            if (coord.getX() >= board.getWidth() || coord.getY() >= board.getHeight())
                 throw new Exception("Not valid coordinates!");
             return coord;
         }

@@ -18,7 +18,7 @@ public class DeadCellState extends CellStateBase{
 
         List<CellMark> marks = new ArrayList<>();
         for(Cell cell : neighbours)
-            marks.add(cell.state.getMark());
+            marks.add(cell.getState().getMark());
 
         CellMark mostCommon = mostCommon(marks);
 

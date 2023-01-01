@@ -28,8 +28,8 @@ public class ConsoleUI implements UI{
 
         System.out.println("Generations made:" + generationCount);
         Pair playersCellsCounts = helper.calculateNumberOfCells(map);
-        System.out.println("Num of cells Player 1: " + playersCellsCounts.a + "\nNum of cells Player 2: " + playersCellsCounts.b);
-        System.out.println("\n===== "  + player.name.toUpperCase() + " " + player.symbol + " =====");
+        System.out.println("Num of cells Player 1: " + playersCellsCounts.getA() + "\nNum of cells Player 2: " + playersCellsCounts.getB());
+        System.out.println("\n===== "  + player.getName().toUpperCase() + " " + player.getSymbol() + " =====");
         System.out.print("a b");
         for (int i = 0; i < map.length; i++){
             writeIndex(i);
@@ -38,7 +38,7 @@ public class ConsoleUI implements UI{
             System.out.println();
             writeIndex(i);
             for (int j = 0; j < map.length; j++) {
-                System.out.print(playerSymbols.get(map[j][i].state.getMark()) + "  ");
+                System.out.print(playerSymbols.get(map[j][i].getState().getMark()) + "  ");
             }
         }
         System.out.println();

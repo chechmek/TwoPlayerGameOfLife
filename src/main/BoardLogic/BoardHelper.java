@@ -26,8 +26,8 @@ public class BoardHelper {
 
         for(Pair p : neighboursOffsets){
             try {
-                if(map[i + p.a][j + p.b].state.isAlive()){
-                    neighbours.add(map[i + p.a][j + p.b]);
+                if(map[i + p.getA()][j + p.getB()].getState().isAlive()){
+                    neighbours.add(map[i + p.getA()][j + p.getB()]);
                 }
             }
             catch (Exception ex){}
@@ -42,9 +42,9 @@ public class BoardHelper {
 
         for (Cell[] cells : map) {
             for (int j = 0; j < cells.length; j++) {
-                if (cells[j].state.getMark() == CellMark.PlayerOne) {
+                if (cells[j].getState().getMark() == CellMark.PlayerOne) {
                     counterPlayerOne++;
-                } else if (cells[j].state.getMark() == CellMark.PlayerTwo) {
+                } else if (cells[j].getState().getMark() == CellMark.PlayerTwo) {
                     counterPlayerTwo++;
                 }
             }
@@ -69,10 +69,10 @@ public class BoardHelper {
             for(int j = 0; j < initMap[i].length; j++){
                 if(j < mirrorLineIndex){
                     buffer.push(initMap[i][j]);
-                    mirroredMap[i][j] = new Cell(initMap[i][j].state);
+                    mirroredMap[i][j] = new Cell(initMap[i][j].getState());
                 }
                 else {
-                    CellState newState = buffer.pop().state;
+                    CellState newState = buffer.pop().getState();
                     if(newState.isAlive()){
                         AliveCellState aliveCellState = (AliveCellState)newState;
                         mirroredMap[i][j] = new Cell(aliveCellState.getOppositePlayerState());

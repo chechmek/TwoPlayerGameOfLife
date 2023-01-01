@@ -7,12 +7,12 @@ import main.Static.Input;
 import java.util.Scanner;
 
 public class Player {
-    public String name;
-    public String symbol;
+    private String name;
+    private String symbol;
     private final Scanner input = new Scanner(System.in);
-    public CellMark playerMark;
+    private CellMark playerMark;
     public Player(CellMark mark){
-        playerMark = mark;
+        setPlayerMark(mark);
     }
     public void play(Board board){
         System.out.println("Type coordinate in one line: a, b  \nExample: 11, 14");
@@ -21,7 +21,7 @@ public class Player {
         while (!got) {
             try {
                 Coordinate coord = Input.getCoordinate(board);
-                board.aliveCell(coord.x, coord.y, playerMark);
+                board.aliveCell(coord.getX(), coord.getY(), getPlayerMark());
                 got = true;
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
@@ -33,7 +33,7 @@ public class Player {
         while (!got) {
             try {
                 Coordinate coord = Input.getCoordinate(board);
-                board.killCellOn(coord.x, coord.y, playerMark);
+                board.killCellOn(coord.getX(), coord.getY(), getPlayerMark());
                 got = true;
 
             } catch (Exception ex) {
@@ -41,5 +41,29 @@ public class Player {
             }
         }
 
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public CellMark getPlayerMark() {
+        return playerMark;
+    }
+
+    public void setPlayerMark(CellMark playerMark) {
+        this.playerMark = playerMark;
     }
 }

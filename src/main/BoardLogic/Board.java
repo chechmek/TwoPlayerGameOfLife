@@ -13,9 +13,9 @@ import main.UILogic.UI;
 import java.util.*;
 
 public class Board implements Displayable {
-    public int width;
-    public int height;
-    public Cell[][] map;
+    private int width;
+    private int height;
+    private Cell[][] map;
     private final List<UI> userInterfaces = new ArrayList<>();
     private int generationCount;
     private final BoardHelper helper = new BoardHelper();
@@ -24,23 +24,23 @@ public class Board implements Displayable {
             w++;
         if(h % 2 != 0)
             h++;
-        this.width = h;
-        this.height = w;
-        initMap(width, height);
+        this.setWidth(h);
+        this.setHeight(w);
+        initMap(getWidth(), getHeight());
         generationCount = 0;
     }
 
 
     public void  nextGeneration(){
-        Cell[][] nextGenMap = new Cell[height][width];
+        Cell[][] nextGenMap = new Cell[getHeight()][getWidth()];
 
-        for(int i = 0; i < map.length; i++)
-            for(int j = 0; j < map[i].length; j++){
-                List<Cell> neighbours = helper.getNeighbours(i, j, map);
-                var newState = map[i][j].state.getNewState(neighbours);
+        for(int i = 0; i < getMap().length; i++)
+            for(int j = 0; j < getMap()[i].length; j++){
+                List<Cell> neighbours = helper.getNeighbours(i, j, getMap());
+                var newState = getMap()[i][j].getState().getNewState(neighbours);
                 nextGenMap[i][j] = new Cell(newState);
             }
-        map = nextGenMap;
+        setMap(nextGenMap);
         generationCount++;
 
     }
@@ -48,42 +48,42 @@ public class Board implements Displayable {
     //for players
     //killCell(x, y)
     public void killCellOn(int i, int j, CellMark attackingPlayerMark) throws Exception {
-        if(map[j][i].state.getMark() == attackingPlayerMark)
+        if(getMap()[j][i].getState().getMark() == attackingPlayerMark)
             throw new Exception("You can not kill own cells");
-        if(map[j][i].state.getMark() == CellMark.Empty)
+        if(getMap()[j][i].getState().getMark() == CellMark.Empty)
             throw new Exception("You can not kill dead cells");
 
-        map[j][i].state = new DeadCellState();
+        getMap()[j][i].setState(new DeadCellState());
     }
 
     public void aliveCell(int i, int j, CellMark playerMark) throws Exception {
         if(playerMark == CellMark.Empty)
             throw new Exception("Got wrong mark");
 
-        if(map[j][i].state.isAlive())
+        if(getMap()[j][i].getState().isAlive())
             throw new Exception("Cell is already alive");
 
-        map[j][i].state = new AliveCellState(playerMark);
+        getMap()[j][i].setState(new AliveCellState(playerMark));
     }
 
     private void initMap(int width, int height){
-        map = new Cell[width][height];
-        for(int i = 0; i < map.length; i++)
-            for(int j = 0; j < map[i].length; j++)
-                map[i][j] = new Cell(new DeadCellState());
+        setMap(new Cell[width][height]);
+        for(int i = 0; i < getMap().length; i++)
+            for(int j = 0; j < getMap()[i].length; j++)
+                getMap()[i][j] = new Cell(new DeadCellState());
     }
 
     public void setUp(){
         //Cell[][] newMap = new Cell[height][width];
-        for(int i = 0; i < map.length; i++)
-            for(int j = 0; j < map[i].length; j++)
-                map[i][j] = new Cell(new DeadCellState());
+        for(int i = 0; i < getMap().length; i++)
+            for(int j = 0; j < getMap()[i].length; j++)
+                getMap()[i][j] = new Cell(new DeadCellState());
 
         Scanner input = new Scanner(System.in);
 
         Player inputPlayer = new Player(CellMark.PlayerOne);
-        inputPlayer.name = "INPUT";
-        inputPlayer.symbol = "";
+        inputPlayer.setName("INPUT");
+        inputPlayer.setSymbol("");
 
         render(inputPlayer);
 
@@ -99,11 +99,11 @@ public class Board implements Displayable {
                     if(inputStr.equals("stop"))
                         break;
                     Coordinate coordinate = Input.getCoordinateFromStr(inputStr, this);
-                    map[coordinate.y][coordinate.x] = new Cell(new AliveCellState(CellMark.PlayerOne));
+                    getMap()[coordinate.getY()][coordinate.getX()] = new Cell(new AliveCellState(CellMark.PlayerOne));
                     render(inputPlayer);
                 }
 
-                map = helper.mirrorMapHorizontally(map);
+                setMap(helper.mirrorMapHorizontally(getMap()));
 
                 render(inputPlayer);
                 System.out.println("This is your initial map");
@@ -119,10 +119,10 @@ public class Board implements Displayable {
     public CellMark getMarkOfWinningPlayer(){
         Set<CellMark> playersLeft = new HashSet<>();
 
-        for(int i = 0; i < map.length; i++)
-            for(int j = 0; j < map[i].length; j++)
-                if(map[i][j].state.isAlive())
-                    playersLeft.add(map[i][j].state.getMark());
+        for(int i = 0; i < getMap().length; i++)
+            for(int j = 0; j < getMap()[i].length; j++)
+                if(getMap()[i][j].getState().isAlive())
+                    playersLeft.add(getMap()[i][j].getState().getMark());
 
         if(playersLeft.size() == 0)
             return null;
@@ -146,6 +146,30 @@ public class Board implements Displayable {
     @Override
     public void render(Player player) {
         for(UI ui : userInterfaces)
-            ui.update(map, generationCount, player);
+            ui.update(getMap(), generationCount, player);
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public Cell[][] getMap() {
+        return map;
+    }
+
+    public void setMap(Cell[][] map) {
+        this.map = map;
     }
 }
