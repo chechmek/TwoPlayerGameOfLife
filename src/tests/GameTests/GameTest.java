@@ -11,10 +11,10 @@ class GameTest {
     @Test
     void start() {
         GameSettings gameSettings = new GameSettings();
-        gameSettings.height = 10;
-        gameSettings.width = 10;
-        gameSettings.ui = new ConsoleUI();
-        assertEquals(10,gameSettings.height);
-        assertEquals(10,gameSettings.width);
+        gameSettings.setHeight(10);
+        gameSettings.setWidth(10);
+        gameSettings.setUi(new ConsoleUI());
+        assertEquals(10, gameSettings.getHeight());
+        assertEquals(10, gameSettings.getWidth());
     }
 }

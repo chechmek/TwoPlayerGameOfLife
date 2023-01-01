@@ -31,9 +31,9 @@ class BoardHelperTest {
         BoardHelper boardHelper = new BoardHelper();
         Pair pairA = new Pair(3,2);
         Pair pairB = new Pair(3,2);
-        assertEquals(boardHelper.calculateNumberOfCells(board.map).a,pairA.a);
-        assertEquals(boardHelper.calculateNumberOfCells(board.map).b,pairB.b);
+        assertEquals(boardHelper.calculateNumberOfCells(board.getMap()).getA(), pairA.getA());
+        assertEquals(boardHelper.calculateNumberOfCells(board.getMap()).getB(), pairB.getB());
         Pair pairTest = new Pair(34,2);
-        assertNotEquals(boardHelper.calculateNumberOfCells(board.map).a,pairTest.a);
+        assertNotEquals(boardHelper.calculateNumberOfCells(board.getMap()).getA(), pairTest.getA());
     }
 }

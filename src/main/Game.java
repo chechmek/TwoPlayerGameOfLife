@@ -20,9 +20,9 @@ public class Game {
     private UI ui;
 
     public Game(GameSettings settings){
-        board = new Board(settings.width, settings.height);
-        board.addUI(settings.ui);
-        ui = settings.ui;
+        board = new Board(settings.getWidth(), settings.getHeight());
+        board.addUI(settings.getUi());
+        ui = settings.getUi();
     }
 
     public void Start() {
@@ -33,23 +33,23 @@ public class Game {
             //p.symbol = Input.GetPlayerSymbol();
         }
         // to delete
-        players.get(0).name = "PlayerA";
-        players.get(0).symbol = "A";
-        players.get(1).name = "PlayerB";
-        players.get(1).symbol = "B";
+        players.get(0).setName("PlayerA");
+        players.get(0).setSymbol("A");
+        players.get(1).setName("PlayerB");
+        players.get(1).setSymbol("B");
         //
         // sort players
         players.sort(new Comparator<>() {
             public int compare(Player o1, Player o2) {
-                if (o1.name.equals(o2.name))
+                if (o1.getName().equals(o2.getName()))
                     return 0;
-                return o1.name.compareTo(o2.name);
+                return o1.getName().compareTo(o2.getName());
             }
         });
 
         try{
             ConsoleUI cui = (ConsoleUI)ui;
-            cui.setSymbols(players.get(0).symbol, players.get(1).symbol);
+            cui.setSymbols(players.get(0).getSymbol(), players.get(1).getSymbol());
         }
         catch(Exception ex){
             System.out.println("Ui is not a console");
@@ -78,7 +78,7 @@ public class Game {
             return false;
 
         for(var p : players)
-            if(p.playerMark == playerMark){
+            if(p.getPlayerMark() == playerMark){
                 showWinningScreen(p);
                 break;
             }
@@ -97,7 +97,7 @@ public class Game {
 
     private void showWinningScreen(Player winningPlayer){
         System.out.println("=================================================");
-        System.out.println("=================== " + winningPlayer.name.toUpperCase() + " WON" + " ==================");
+        System.out.println("=================== " + winningPlayer.getName().toUpperCase() + " WON" + " ==================");
         System.out.println("=================================================");
 
     }
