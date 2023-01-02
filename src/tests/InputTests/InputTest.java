@@ -17,16 +17,4 @@ class InputTest {
         }
 
     }
-
-    @Test
-    void getPlayerSymbol() {
-    }
-
-    @Test
-    void getCoordinate() {
-    }
-
-    @Test
-    void getCoordinateFromStr() {
-    }
 }

@@ -25,8 +25,4 @@ class PlayerTest {
         String inputDead = ("2 6");
         player.play(inputAlive,inputDead,board);
     }
-
-    @Test
-    void getCoordFromPlayer() {
-    }
 }

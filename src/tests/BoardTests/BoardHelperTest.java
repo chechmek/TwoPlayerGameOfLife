@@ -11,10 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class BoardHelperTest {
 
     @Test
-    void getNeighbours() {
-    }
-
-    @Test
     void calculateNumberOfCells() {
         Board board = new Board(8,8);
         try {
