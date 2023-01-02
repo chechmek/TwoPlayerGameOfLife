@@ -117,7 +117,7 @@ public class Board implements Displayable {
             }
         }
     }
-    public CellMark getMarkOfWinningPlayer(){
+    public CellMark getMarkOfWinningPlayer() throws Exception {
         Set<CellMark> playersLeft = new HashSet<>();
 
         for(int i = 0; i < getMap().length; i++)
@@ -126,7 +126,7 @@ public class Board implements Displayable {
                     playersLeft.add(getMap()[i][j].getState().getMark());
 
         if(playersLeft.size() == 0)
-            return null;
+            throw new Exception("There are no players left");
         if(playersLeft.size() == 1){
             return playersLeft.iterator().next();
         }

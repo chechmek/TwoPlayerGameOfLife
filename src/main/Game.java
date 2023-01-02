@@ -53,10 +53,17 @@ public class Game {
             nextPlayer();
             board.render(curPlayer);
 
-            if(checkIfWin())
+            try{
+                if(checkIfWin())
+                    break;
+            }
+            catch (Exception ex){
+                System.out.println(ex.getMessage());
                 break;
+            }
 
-            curPlayer.play(Input.getString(""),Input.getString(""),board);
+
+            curPlayer.play(board);
             board.render(curPlayer);
 
             System.out.println("Press ENTER to see new generation!");
@@ -65,7 +72,7 @@ public class Game {
         }
     }
 
-    private boolean checkIfWin(){
+    private boolean checkIfWin() throws Exception {
         CellMark playerMark = board.getMarkOfWinningPlayer();
         if(playerMark == null)
             return false;

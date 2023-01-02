@@ -1,4 +1,4 @@
-package CoordTests;
+package tests.CoordTests;
 
 import main.Models.Coordinate;
 import org.junit.jupiter.api.Assertions;

@@ -1,4 +1,4 @@
-package GameTests;
+package tests.GameTests;
 
 import main.Models.GameSettings;
 import main.UILogic.ConsoleUI;

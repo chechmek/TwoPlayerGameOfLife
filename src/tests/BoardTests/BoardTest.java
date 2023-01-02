@@ -1,6 +1,7 @@
-package BoardTests;
+package tests.BoardTests;
 
 import main.BoardLogic.Board;
+import main.CellLogic.AliveCellState;
 import main.CellLogic.Cell;
 import main.CellLogic.CellMark;
 import org.junit.jupiter.api.Assertions;
@@ -61,9 +62,12 @@ class BoardTest {
     }
 
     @Test
-    void getMarkOfWinningPlayer() {
+    void getMarkOfWinningPlayer() throws Exception {
         Board board = new Board(10,10);
         board.setUp(Boolean.TRUE);
+        board.getMap()[3][3].setState(new AliveCellState(CellMark.PlayerOne));
+        board.getMap()[3][4].setState(new AliveCellState(CellMark.PlayerOne));
+        board.getMap()[3][5].setState(new AliveCellState(CellMark.PlayerOne));
         board.getMarkOfWinningPlayer();
     }
 

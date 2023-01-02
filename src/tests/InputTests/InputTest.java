@@ -1,4 +1,4 @@
-package InputTests;
+package tests.InputTests;
 
 import main.BoardLogic.Board;
 import main.Static.Input;

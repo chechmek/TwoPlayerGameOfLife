@@ -11,13 +11,13 @@ public class Player {
     public Player(CellMark mark){
         setPlayerMark(mark);
     }
-    public void play(String inputAlive,String inputKill ,Board board){
+    public void play(Board board){
         System.out.println("Type coordinate in one line: a, b  \nExample: 11, 14");
         System.out.println("Create cell:");
         boolean got = false;
         while (!got) {
             try {
-                Coordinate coord = Input.getCoordinateFromStr(Input.getString(inputAlive), board);
+                Coordinate coord = Input.getCoordinateFromStr(Input.getString(""), board);
                 board.aliveCell(coord.getX(), coord.getY(), getPlayerMark());
                 got = true;
             } catch (Exception ex) {
@@ -29,7 +29,7 @@ public class Player {
         System.out.println("Delete cell:");
         while (!got) {
             try {
-                Coordinate coord = Input.getCoordinateFromStr(Input.getString(inputKill),board);
+                Coordinate coord = Input.getCoordinateFromStr(Input.getString(""),board);
                 board.killCellOn(coord.getX(), coord.getY(), getPlayerMark());
                 got = true;
 

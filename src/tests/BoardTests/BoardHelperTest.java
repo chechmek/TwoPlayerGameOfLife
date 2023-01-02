@@ -1,4 +1,4 @@
-package BoardTests;
+package tests.BoardTests;
 
 import main.BoardLogic.Board;
 import main.BoardLogic.BoardHelper;

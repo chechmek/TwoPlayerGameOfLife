@@ -1,4 +1,4 @@
-package ConsoleUITests;
+package tests.ConsoleUITests;
 
 import main.CellLogic.CellMark;
 import main.Models.Player;
